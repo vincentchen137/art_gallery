@@ -1,0 +1,141 @@
+<div class="container-md">
+  {{#if error}}
+  <div class="add-form">
+    <h4 class="form-heading">Add artist</h4>
+    <p class="form-error">{{error.message}}</p>
+    <div class="col-6">
+      <form method="POST" action="artists">
+        <div class="row">
+          <div class="col">
+            <input type="text" name="fname" class="form-control" placeholder="First name" value="{{error.fname}}" />
+          </div>
+          <div class="col">
+            <input type="text" name='lname' class="form-control" placeholder="Last name" value="{{error.lname}}" />
+          </div>
+        </div>
+        <div class="row second-row">
+          <div class="col">
+            <input type="text" name="email" class="form-control" placeholder="Email address" value="{{error.email}}" />
+          </div>
+          <div class="col">
+            <input type="text" name="phone" class="form-control" placeholder="Phone number" value="{{error.phone}}" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-dark search-submit">
+              Add
+            </button>
+            <a href="/artists" class="btn btn-secondary">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {{else}}
+  <h2 class="page-heading">Artists</h2>
+
+
+  <div class="search-form">
+
+
+    <h4 class="form-heading">Search artists</h4>
+
+    <div class="col-6">
+      {{!-- Search Form --}}
+      <form class="search-artists" method="GET" action="/artists">
+        <div class="row">
+          <div class="col">
+            <input type="text" name="fname" class="form-control fname" placeholder="First name" />
+          </div>
+          <div class="col">
+            <input type="text" name="lname" class="form-control lname" placeholder="Last name" />
+          </div>
+        </div>
+        <div class="row second-row">
+          <div class="col">
+            <input type="text" name="email" class="form-control email" placeholder="Email address" />
+          </div>
+          <div class="col">
+            <input type="text" name="phone" class="form-control phone" placeholder="Phone number" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-dark search-submit">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  {{!-- Results Table --}}
+
+  <h4 class="form-heading">Artists Table</h4>
+  <table id="posts" class="table table-striped table-hover results-table">
+    <thead class="table-dark">
+      <th>Artist Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Edit</th>
+    </thead>
+    <tbody>
+      {{#each context}}
+      <tr id="{{this.id}}">
+        <td>{{this.id}}</td>
+        <td>{{this.first}}</td>
+        <td>{{this.last}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.phone}}</td>
+        <td><a href="/artists/{{this.id}}" class="btn btn-dark edit" data-id={{this.id}}>Edit</a></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{!-- Add new Artist form --}}
+  <div class="add-form">
+
+    <h4 class="form-heading">Add artist</h4>
+
+    <div class="col-6">
+      <form method="POST" action="artists">
+        <div class="row">
+          <div class="col">
+            <input type="text" name="fname" class="form-control" placeholder="First name" required />
+          </div>
+          <div class="col">
+            <input type="text" name='lname' class="form-control" placeholder="Last name" required />
+          </div>
+        </div>
+        <div class="row second-row">
+          <div class="col">
+            <input type="email" name="email" class="form-control" placeholder="Email address" required />
+          </div>
+          <div class="col">
+            <input type="tel" name="phone" class="form-control" placeholder="Phone number" pattern=".{10}" required
+              title="10 numbers minimum/maximum" maxlength="10" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-dark search-submit">
+              Add
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {{/if}}
+
+</div>
+
+
+<script src="./js/artists.js"></script>

@@ -1,0 +1,91 @@
+<div class="container-md">
+  {{#if error}}
+  <h2 class="page-heading">Edit Artist</h2>
+  <p class="form-error">{{error.message}}</p>
+  <div class="search-form">
+    <div class="col-6">
+      <form method="POST" action="/artists/edit/{{error.id}}">
+        <div class="row">
+          <div class="col">
+            <input type="text" name="fname" class="form-control fname" value="{{error.fname}}"/>
+          </div>
+          <div class="col">
+            <input type="text" name="lname" class="form-control lname" value="{{error.lname}}"/>
+          </div>
+        </div>
+        <div class="row second-row">
+          <div class="col">
+            <input type="email" name="email" class="form-control email" value="{{error.email}}"/>
+          </div>
+          <div class="col">
+            <input type="tel" name="phone" class="form-control phone" pattern=".{10}" required title = "10 numbers minimum/maximum" maxlength="10" value="{{error.phone}}" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-dark search-submit">
+              Update Artist
+            </button>
+            <a href="/artists/delete/{{error.id}}" class="btn btn-danger">Delete Artist</a>
+            <a href="/artists" class="btn btn-secondary">Cancel</a>
+          </div>
+        </div>
+        {{!-- {{/each}} --}}
+      </form>
+    </div>
+  </div>
+
+  {{else}}
+  <h2 class="page-heading">Edit Artist</h2>
+  <div class="search-form">
+
+
+    {{!-- <h4 class="form-heading">Edit artists</h4> --}}
+
+    <div class="col-6">
+      {{!-- Edit Form --}}
+      {{#each context}}
+      <form method="POST" action="/artists/edit/{{this.id}}">
+
+        <div class="row">
+
+          <div class="col">
+            <input type="text" name="fname" class="form-control fname" value={{this.first}} />
+          </div>
+          <div class="col">
+            <input type="text" name="lname" class="form-control lname" value={{this.last}} />
+          </div>
+        </div>
+        <div class="row second-row">
+          <div class="col">
+            <input type="email" name="email" class="form-control email" value={{this.email}} />
+          </div>
+          <div class="col">
+            <input type="tel" name="phone" class="form-control phone" pattern=".{10}" required title = "10 numbers minimum/maximum" maxlength="10" value={{this.phone}} />
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col">
+
+            <button type="submit" class="btn btn-dark search-submit">
+              Update Artist
+            </button>
+            <a href="/artists/delete/{{this.id}}" class="btn btn-danger">Delete Artist</a>
+            <a href="/artists" class="btn btn-secondary">Cancel</a>
+            {{!-- <button type="button" class="btn btn-secondary">
+              Cancel
+            </button> --}}
+          </div>
+        </div>
+
+
+      </form>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+</div>
+
+<script src="./js/artists.js"></script>

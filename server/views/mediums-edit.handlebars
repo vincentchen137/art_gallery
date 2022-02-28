@@ -1,0 +1,71 @@
+<div class="container-md">
+  {{#if error}}
+  <h2 class="page-heading">Edit Mediums</h2>
+    <div class="search-form">
+      <p class="form-error">{{error.message}}</p>
+      <div class="col-6">
+        {{!-- Edit Form --}}
+        <form method="POST" action="/mediums/edit/{{error.id}}">
+          <div class="row">
+            <div class="col">
+              <input type="text" name="description" class="form-control" value="{{error.name}}" required/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn btn-dark search-submit">
+                Update Medium
+              </button>
+              {{!-- <a href="/mediums/delete/{{this.id}}" class="btn btn-danger">Delete Medium</a> --}}
+              <a href="/mediums" class="btn btn-secondary">Cancel</a>
+              {{!-- <button type="button" class="btn btn-secondary">
+                Cancel
+              </button> --}}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  {{else}}
+  <h2 class="page-heading">Edit Mediums</h2>
+
+  {{!-- This edit page is not working --}}
+
+  <div class="search-form">
+
+
+    {{!-- <h4 class="form-heading">Edit artists</h4> --}}
+
+    <div class="col-6">
+      {{!-- Edit Form --}}
+      {{#each context}}
+      <form method="POST" action="/mediums/edit/{{this.id}}">
+
+        <div class="row">
+          <div class="col">
+            <input type="text" name="description" class="form-control" value={{this.description}} required/>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+
+            <button type="submit" class="btn btn-dark search-submit">
+              Update Medium
+            </button>
+            {{!-- <a href="/mediums/delete/{{this.id}}" class="btn btn-danger">Delete Medium</a> --}}
+            <a href="/mediums" class="btn btn-secondary">Cancel</a>
+            {{!-- <button type="button" class="btn btn-secondary">
+              Cancel
+            </button> --}}
+          </div>
+        </div>
+
+
+      </form>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+</div>

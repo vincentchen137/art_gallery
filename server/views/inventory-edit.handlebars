@@ -1,0 +1,93 @@
+<div class="container-md">
+  {{#if error}}
+  <h2 class="page-heading">Edit Inventory</h2>
+  <p class="form-error">{{error.message}}</p>
+  {{!-- <p>{{error.artworkName}}</p>   --}}
+  {{!-- {{#each context}}
+  <p>{{error.id}}TEST</p>
+  {{/each}} --}}
+
+  {{!-- <div class="search-form">
+    <div class="col-6">
+      {{#each context}}
+      <p>{{this.id}}TEST</p>
+      {{/each}}
+    </div>
+  </div> --}}
+    <a href="/inventory" class="btn btn-secondary">Return to Inventory</a>
+  
+  {{else}}
+  <h2 class="page-heading">Edit Inventory</h2>
+  <div class="search-form">
+
+    <div class="col-6">
+      {{!-- Edit Form --}}
+      {{#each context}}
+      <form method="POST" action="/inventory/edit/{{this.id}}">
+        {{/each}}
+
+        <div class="row">
+          <div class="form-group col">
+            {{#each context}}
+            <input type="text" name="name" class="form-control" value={{this.name}} required/>
+            {{/each}}
+            <select name="artistId" id="inputArtist" class="form-control">
+              {{#each context}}
+              <option selected='selected' value={{this.artistId}}>{{this.artistName}}</option>
+              {{/each}}
+              <option value="NULL">NULL</option>
+              {{#each artists}}
+              <option value={{this.artistId}}>{{this.artistName}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <select name="styleId" id="inputStyle" class="form-control">
+              {{!-- <option selected>Choose Style..</option> --}}
+              {{#each context}}
+              <option selected='selected' value={{this.styleId}}>{{this.styleDescription}}</option>
+              {{/each}}
+              {{#each styles}}
+              <option value={{this.styleId}}>{{this.styleDescription}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group col">
+            <select name="mediumId" id="inputMedium" class="form-control">
+              {{!-- <option selected>Choose Medium..</option> --}}
+              {{#each context}}
+              <option selected='selected' value={{this.mediumId}}>{{this.mediumDescription}}</option>
+              {{/each}}
+              {{#each mediums}}
+              <option value={{this.mediumId}}>{{this.mediumDescription}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+
+            <button type="submit" class="btn btn-dark search-submit">
+              Update Artwork
+            </button>
+            {{#each context}}
+            <a href="/inventory/delete/{{this.id}}" class="btn btn-danger">Delete Artwork</a>
+            {{/each}}
+            <a href="/inventory" class="btn btn-secondary">Cancel</a>
+            {{!-- <button type="button" class="btn btn-secondary">
+              Cancel
+            </button> --}}
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+  </div>
+  {{/if}}
+</div>

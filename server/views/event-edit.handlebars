@@ -1,0 +1,63 @@
+<div class="container-md">
+  {{#if error}}
+  <h2 class="page-heading">Edit Event</h2>
+  <div class="search-form">
+    <div class="col-6">
+    <p class="form-error">{{error.message}}</p>
+      <form method="POST" action="/events/edit/{{error.id}}">
+        <div class="row">
+          <div class="col">
+            <input type="text" name="name" class="form-control fname" value={{error.name}} required/>
+          </div>
+        </div>
+        <div class="row second-row">
+          <div class="col">
+            <input type="date" name="date" class="form-control date" value={{error.date}} required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-dark search-submit">
+              Update Event
+            </button>
+            <a href="/events/delete/{{error.id}}" class="btn btn-danger">Delete Event</a>
+            <a href="/events" class="btn btn-secondary">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {{else}}
+  <h2 class="page-heading">Edit Event</h2>
+  <div class="search-form">
+    <div class="col-6">
+      {{#each context}}
+      <form method="POST" action="/events/edit/{{this.id}}">
+        <div class="row">
+          <div class="col">
+            <input type="text" name="name" class="form-control fname" value={{this.name}} required/>
+          </div>
+        </div>
+        <div class="row second-row">
+          <div class="col">
+            <input type="date" name="date" class="form-control date" value={{this.date}} required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-dark search-submit">
+              Update Event
+            </button>
+            <a href="/events/delete/{{this.id}}" class="btn btn-danger">Delete Event</a>
+            <a href="/events" class="btn btn-secondary">Cancel</a>
+            {{!-- <button type="button" class="btn btn-secondary">
+              Cancel
+            </button> --}}
+          </div>
+        </div>
+      </form>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+</div>

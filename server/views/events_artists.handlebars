@@ -1,0 +1,106 @@
+<div class="container-md">
+  {{#if error}}
+  <div class="add-form">
+    <h4 class="form-heading">Add an Artist to an Event</h4>
+    <p class="form-error">{{error.message}}</p>
+      <a href="/events_artists" class="btn btn-secondary">Return to Events_Artists</a>
+  </div>
+  {{else}}
+  <h2 class="page-heading">Events_Artists</h2>
+
+  <table class="table table-striped table-hover">
+    <h4 class="table-heading">Artists Attending at Events Table</h4>
+    <thead class="table-dark">
+      <th>Event_Artist Id</th>
+      <th>Event Id</th>
+      <th>Event Name</th>
+      <th>Artist Id</th>
+      <th>Artist</th>
+      <th>Edit</th>
+    </thead>
+    <tbody>
+      {{#each context}}
+      <tr>
+        <td>{{this.event_artistId}}</td>
+        <td>{{this.eventId}}</td>
+        <td>{{this.eventName}}</td>
+        <td>{{this.artistId}}</td>
+        <td>{{this.artistName}}</td>
+        {{!-- edit --}}
+        <td><a href="/events_artists/{{this.event_artistId}}" class="btn btn-dark edit"
+            data-id={{this.eventId}}>Edit</a></td>
+        {{!-- delete removed from here --}}
+        {{!-- <td><a href="#" class="btn btn-danger" data-id={{this.id}}>Delete</a></td> --}}
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <div class="add-form">
+    <h4 class="form-heading">Add an Artist to an Event</h4>
+    <div class="col-8">
+      <form method="POST" action="events_artists">
+        <div class="row">
+          <div class="form-group col">
+            <select name="eventId" id="inputEvent" class="form-control">
+              <option selected>Choose Event..</option>
+              {{#each events}}
+              <option value="{{this.eventId}}">{{this.eventName}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group col">
+            <select name="artistId" id="inputArtist" class="form-control">
+              <option selected>Choose Artist's Full Name..</option>
+              {{#each artists}}
+              <option value={{this.artistId}}>{{this.artistName}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn btn-dark add-submit">
+                Add
+              </button>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>
+  {{/if}}
+</div>
+  <!-- Hidden when page loads -->
+  {{!-- <form class="form-to-add-update">
+    <h3 class="form-heading"></h3>
+    <div class="form-group">
+      <label for="eventId">Event Id</label>
+      <input type="number" class="form-control" id="eventId" placeholder="eventId" required />
+    </div>
+    <div class="form-group">
+      <label for="artistId">Artist Id</label>
+      <input type="number" class="form-control" id="artistId" placeholder="artistId" required />
+    </div>
+    <div>
+      <button type="submit" class="btn btn-dark form-submit">Submit</button>
+    </div>
+  </form> --}}
+  <!-- <hr class="hr-spacing" />
+        <form class="form-to-search">
+          <h3 class="form-heading">Search Artist(s) attending at Event by Event Id</h3>
+          <div class="form-group">
+            <input
+              type="number"
+              class="form-control"
+              id="eventId"
+              placeholder="Event Id"
+              required
+            />
+          </div>
+          <div>
+            <button type="submit" class="btn btn-dark search-submit">Submit</button>
+          </div>
+        </form> -->
+
+
+{{!-- <script src="https://kit.fontawesome.com/fc8bbd5566.js" crossorigin="anonymous"></script> --}}
+<script src="./js/gallery_events-gallery_artists.js"></script> 
